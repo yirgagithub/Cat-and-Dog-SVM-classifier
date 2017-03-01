@@ -12,7 +12,7 @@ cv::Mat loadVocabulary(cv::Mat predictImage)
     cout<<"load vocabulary"<<endl;
     vector<cv::KeyPoint> predictKeypoint;
     cv::Mat predictImageDescriptor;
-    cv::FileStorage fileStorage("C:\\Users\\what\\Documents\\CodeBlock\\dictionary.yml",cv::FileStorage::READ);
+    cv::FileStorage fileStorage("dictionary.yml",cv::FileStorage::READ);
     cv::Mat vocabulary;
     fileStorage["vocabulary"]>>vocabulary;
     fileStorage.release();
@@ -39,11 +39,11 @@ void predict(string imageName)
     if(predictMat.empty())
         cout<<"image is not read"<<endl;
     cv::SVM svm;
-    svm.load("C:\\Users\\what\\Documents\\CodeBlock\\svmtrained.yml");
+    svm.load("svmtrained.yml");
     cout<<"svm loaded successfully"<<endl;
     cv::Mat predictImageDescriptor=loadVocabulary(predictMat);
     int result=(int)svm.predict(predictImageDescriptor);
-    cout<<"predicted successfully"<<endl;
+    
     if(result==1)
         cout<<"inputed Image is cat"<<endl;
     if(result==0)
