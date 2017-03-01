@@ -42,11 +42,9 @@ map<string,cv::Mat> createTraingImage(vector<string> filenames,vector<string> la
         mapedImage[label].push_back(descriptor);
 
     }
-    cout<<"out from the for loop"<<endl;
+    
     length=descriptor.cols;
     typeImage=descriptor.type();
-    cout<<"train image created"<<endl;
-    cout<<"maped image created"<<endl;
     return mapedImage;
 
 }
@@ -84,8 +82,8 @@ void trainSVMFinal(map<string,cv::Mat> mapedImage)
     cv::SVM svm;
     bool trainSvm=svm.train(samples,labelsMat,cv::Mat(),cv::Mat(),svmParam);
     cout<<"trained successfully "<<endl;
-     char* fs="C:\\Users\\what\\Documents\\CodeBlock\\svmtrained.yml";
-     cout<<"why not here";
+     char* fs="svmtrained.yml";
+    
     svm.save(fs);
 
 }
@@ -93,7 +91,7 @@ void trainSVMFinal(map<string,cv::Mat> mapedImage)
 
 void trainSVM()
 {
-    cv::FileStorage fileStorage("C:\\Users\\what\\Documents\\CodeBlock\\dictionary.yml",cv::FileStorage::READ);
+    cv::FileStorage fileStorage("dictionary.yml",cv::FileStorage::READ);
     cv::Mat vocabulary;
     fileStorage["vocabulary"]>>vocabulary;
     fileStorage.release();
@@ -105,7 +103,7 @@ void trainSVM()
     for(int i=0; i<40; i++)
     {
 
-        sprintf(filename,"C:\\Users\\what\\Documents\\TryImage\\images\\%i.jpg",i+1);
+        sprintf(filename,"%i.jpg",i+1);
         filenames.push_back(filename);
         if(i<16)
             labels.push_back("cat");
