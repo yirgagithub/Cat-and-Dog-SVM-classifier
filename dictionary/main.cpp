@@ -22,7 +22,7 @@ int main()
     cv::SiftDescriptorExtractor siftDescriptorExtractor;
     for(int i=0; i<40; i++)
     {
-        sprintf(filename,"C:\\Users\\what\\Documents\\TryImage\\images\\%i.jpg",i);
+        sprintf(filename,"images\\%i.jpg",i);
         image=cv::imread(filename,0);
         sift.detect(image,keypoints);
         siftDescriptorExtractor.compute(image,keypoints,descriptor);
@@ -42,11 +42,11 @@ int main()
 //cluster the feature vectors
     cv::Mat dictionary=bowTrainer.cluster(unclusteredDescriptors);
 //store the vocabulary
-    cv::FileStorage fs("C:\\Users\\what\\Documents\\CodeBlock\\dictionary.yml", cv::FileStorage::WRITE);
+    cv::FileStorage fs("dictionary.yml", cv::FileStorage::WRITE);
     fs << "vocabulary" << dictionary;
     fs.release();
     trainSVM();
-    string predictImage="C:\\Users\\what\\Documents\\TryImage\\what.jpg";
+    string predictImage="predictMe.jpg";
     predict(predictImage);
 
 
